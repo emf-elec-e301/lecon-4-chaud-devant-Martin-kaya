@@ -12,7 +12,7 @@
 #include "mcc_generated_files/timer/delay.h"
 #include "junoke_song_commande.h"
 #include "junoke_eye_commande.h"
-
+uint8_t yeux ;
 //----------------------------------------------------------
 // MAIN APPLICATION
 //----------------------------------------------------------
@@ -27,13 +27,17 @@ int main(void)
     //----------------------------------------------------------
     
     while(1){
-        //----------------------------------------------------------
-        // VOTRE CODE CI-DESSOUS
-        // INSTRUCTIONS EXECUTEES EN BOUCLE INDEFINIMENT
-        //----------------------------------------------------------
-        
+        yeux = ultrason_distance ();
+        if (yeux<5)
+        {
+            buzzer_tone(NOTE_C3,100,0);
+        }
+        else if (yeux<10)  
+        {buzzer_sing (SING_OHOOH);
+        }
+        else if (yeux>20)
+        {     
+         buzzer_tone(NOTE_C7,50,0);
+        }
     }
 }
-//----------------------------------------------------------
-// FIN DU CODE
-//----------------------------------------------------------
